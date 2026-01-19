@@ -70,7 +70,6 @@
     @media(max-width:768px){ .hero h2{font-size:2.2rem;} .hero p{font-size:1.1rem;} }
   </style>
 </head>
-
 <body>
 
 <nav>
@@ -93,7 +92,7 @@
 
 <section class="section" id="bots">
   <h3>Login with Discord to manage your bots</h3>
-  <a href="#" class="login-btn" id="loginBtn">Login with Discord</a>
+  <a href="https://discord.com/oauth2/authorize?client_id=1462950402088632480&response_type=code&redirect_uri=https%3A%2F%2Fbiblebots-1shb.onrender.com%2Fcallback&scope=guilds.join" class="login-btn" id="loginBtn">Login with Discord</a>
 
   <div class="status">
     <div id="engineStatus">Bible Engine Bot: Checking...</div>
@@ -128,32 +127,6 @@
 </footer>
 
 <script>
-// Placeholder login simulation
-let loggedIn = false;
-const loginBtn = document.getElementById("loginBtn");
-const engineLink = document.getElementById("engineLink");
-const helperLink = document.getElementById("helperLink");
-
-loginBtn.addEventListener("click", () => {
-  loggedIn = true;
-  alert("You are now logged in with Discord! (Simulation)");
-  // Enable bot links
-  document.querySelectorAll(".visit-btn").forEach(btn => {
-    btn.classList.remove("disabled");
-    btn.href = btn.closest(".card").querySelector("h4").textContent.includes("Engine")
-      ? "https://deddsbot.onrender.com/"
-      : "https://deddshelperbot.onrender.com/";
-  });
-  document.querySelectorAll(".invite-btn").forEach(btn => {
-    btn.classList.remove("disabled");
-    btn.href = btn.closest(".card").querySelector("h4").textContent.includes("Engine")
-      ? "https://discord.com/oauth2/authorize?client_id=1460782091116482602&permissions=8&integration_type=0&scope=bot"
-      : "https://discord.com/oauth2/authorize?client_id=1460964137956933747&permissions=8&integration_type=0&scope=bot";
-  });
-  engineLink.href = "https://deddsbot.onrender.com/";
-  helperLink.href = "https://deddshelperbot.onrender.com/";
-});
-
 // Bot status simulation
 async function checkStatus(url, id){
   try{
