@@ -92,7 +92,7 @@
 
 <section class="section" id="bots">
   <h3>Login with Discord to manage your bots</h3>
-  <a href="https://discord.com/oauth2/authorize?client_id=1462950402088632480&response_type=code&redirect_uri=https%3A%2F%2Fbiblebots-1shb.onrender.com%2Fcallback&scope=guilds.join" class="login-btn" id="loginBtn">Login with Discord</a>
+  <a href="/login" class="login-btn" id="loginBtn">Login with Discord</a>
 
   <div class="status">
     <div id="engineStatus">Bible Engine Bot: Checking...</div>
@@ -127,6 +127,38 @@
 </footer>
 
 <script>
+// Enable Visit/Invite buttons after login
+async function enableBotLinks() {
+  try {
+    const res = await fetch("/session");
+    const data = await res.json();
+    if (!data.loggedIn) return;
+
+    // Enable buttons
+    document.querySelectorAll(".visit-btn").forEach(btn => {
+      btn.classList.remove("disabled");
+      btn.href = btn.closest(".card").querySelector("h4").textContent.includes("Engine")
+        ? "https://deddsbot.onrender.com/"
+        : "https://deddshelperbot.onrender.com/";
+    });
+
+    document.querySelectorAll(".invite-btn").forEach(btn => {
+      btn.classList.remove("disabled");
+      btn.href = btn.closest(".card").querySelector("h4").textContent.includes("Engine")
+        ? "https://discord.com/oauth2/authorize?client_id=1460782091116482602&permissions=8&scope=bot"
+        : "https://discord.com/oauth2/authorize?client_id=1460964137956933747&permissions=8&scope=bot";
+    });
+
+    // Update login button
+    const loginBtn = document.getElementById("loginBtn");
+    loginBtn.textContent = `Logged in as ${data.user.username}`;
+    loginBtn.href = "/dashboard";
+
+  } catch (err) {
+    console.error("Failed to fetch session:", err);
+  }
+}
+
 // Bot status simulation
 async function checkStatus(url, id){
   try{
@@ -141,6 +173,8 @@ async function checkStatus(url, id){
 
 checkStatus("https://deddsbot.onrender.com/", "engineStatus");
 checkStatus("https://deddshelperbot.onrender.com/", "helperStatus");
+
+enableBotLinks();
 </script>
 
 </body>
