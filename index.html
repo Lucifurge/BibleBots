@@ -248,6 +248,69 @@
       .hero h2{font-size:2.2rem;}
       .hero p{font-size:1.1rem;}
     }
+    .hero {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 5rem 2rem;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(29,185,84,0.85), rgba(245,197,66,0.85)),
+    url('https://images.unsplash.com/photo-1601924582975-8ef3b5f5b469?auto=format&fit=crop&w=1950&q=80')
+    center/cover no-repeat;
+}
+
+/* Logo slideshow overlay */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 260px;
+  opacity: 0.14;
+  animation: heroLogoSlide 18s infinite ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Keep hero content above animation */
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Logo animation */
+@keyframes heroLogoSlide {
+  0% {
+    background-image: url("logo.png");
+    opacity: 0.14;
+  }
+  30% {
+    background-image: url("logo.png");
+    opacity: 0.14;
+  }
+  33% {
+    background-image: url("bg.png");
+    opacity: 0.14;
+  }
+  63% {
+    background-image: url("bg.png");
+    opacity: 0.14;
+  }
+  66% {
+    background-image: url("bh.png");
+    opacity: 0.14;
+  }
+  96% {
+    background-image: url("bh.png");
+    opacity: 0.14;
+  }
+  100% {
+    background-image: url("logo.png");
+    opacity: 0.14;
+  }
+}
   </style>
 </head>
 
